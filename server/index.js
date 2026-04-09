@@ -2,6 +2,7 @@ import express from "express";
 import { createServer } from "http";
 import { WebSocketServer } from "ws";
 import path from "path";
+import fs from "fs";
 import { fileURLToPath } from "url";
 
 import { transcribeAudio } from "./transcribe.js";
@@ -13,9 +14,11 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 const server = createServer(app);
 
-// Serve static client build in production
+// Serve static client build in production (if it exists)
 const clientDist = path.join(__dirname, "..", "client", "dist");
-app.use(express.static(clientDist));
+if (fs.existsSync(clientDist)) {
+  app.use(express.static(clientDist));
+}
 
 // Health check
 app.get("/api/health", (_req, res) => {
@@ -106,10 +109,12 @@ function send(ws, data) {
   }
 }
 
-// Fallback to index.html for SPA routing
-app.get("*", (_req, res) => {
-  res.sendFile(path.join(clientDist, "index.html"));
-});
+// Fallback to index.html for SPA routing (production only)
+if (fs.existsSync(clientDist)) {
+  app.get("*", (_req, res) => {
+    res.sendFile(path.join(clientDist, "index.html"));
+  });
+}
 
 server.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
