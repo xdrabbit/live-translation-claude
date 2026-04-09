@@ -1,0 +1,94 @@
+.record-button-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.record-button {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.record-button:hover:not(:disabled) {
+  border-color: var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.record-button.recording {
+  border-color: var(--red);
+  box-shadow: 0 0 20px var(--red-glow);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.record-button.processing {
+  border-color: var(--accent);
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.record-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.record-button-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stop-icon {
+  width: 24px;
+  height: 24px;
+  background: var(--red);
+  border-radius: 4px;
+}
+
+.mic-icon {
+  color: var(--text-muted);
+}
+
+.record-button:hover:not(:disabled) .mic-icon {
+  color: var(--accent);
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.record-label {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px var(--red-glow);
+  }
+  50% {
+    box-shadow: 0 0 35px var(--red-glow);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

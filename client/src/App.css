@@ -1,0 +1,99 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.app-title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.connection-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--red);
+  transition: background 0.3s;
+}
+
+.connection-status.connected .status-dot {
+  background: var(--green);
+}
+
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 0;
+  gap: 24px;
+  min-height: 0;
+}
+
+.transcript-container {
+  flex: 1;
+  display: flex;
+  gap: 16px;
+  min-height: 300px;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 0 8px;
+  flex-shrink: 0;
+}
+
+.status-badge {
+  font-size: 13px;
+  color: var(--accent);
+  background: rgba(99, 102, 241, 0.1);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.error-badge {
+  font-size: 13px;
+  color: var(--red);
+  background: rgba(239, 68, 68, 0.1);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 500;
+  max-width: 500px;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .transcript-container {
+    flex-direction: column;
+    min-height: 400px;
+  }
+
+  .app {
+    padding: 0 16px;
+  }
+}
