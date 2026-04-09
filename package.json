@@ -8,10 +8,7 @@
     "dev:server": "npm run dev --prefix server",
     "dev:client": "npm run dev --prefix client",
     "dev:whisper": "cd whisper && python server.py",
-    "dev": "concurrently \"npm run dev:whisper\" \"npm run dev:server\" \"npm run dev:client\"",
+    "dev": "npm run dev:whisper & npm run dev:server & npm run dev:client",
     "build:client": "npm run build --prefix client"
-  },
-  "devDependencies": {
-    "concurrently": "^8.2.2"
   }
 }
