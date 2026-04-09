@@ -1,5 +1,3 @@
-import FormData from "form-data";
-
 const WHISPER_URL =
   process.env.WHISPER_URL || "http://localhost:8787/transcribe";
 
@@ -12,7 +10,8 @@ const WHISPER_URL =
  */
 export async function transcribeAudio(audioBuffer, language, filename = "audio.webm") {
   const form = new FormData();
-  form.append("audio", audioBuffer, { filename, contentType: "audio/webm" });
+  const blob = new Blob([audioBuffer], { type: "audio/webm" });
+  form.append("audio", blob, filename);
   if (language) {
     form.append("language", language);
   }
@@ -20,7 +19,6 @@ export async function transcribeAudio(audioBuffer, language, filename = "audio.w
   const response = await fetch(WHISPER_URL, {
     method: "POST",
     body: form,
-    headers: form.getHeaders(),
   });
 
   if (!response.ok) {
